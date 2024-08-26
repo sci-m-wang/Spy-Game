@@ -2,6 +2,10 @@ import streamlit as st
 from random import choices, randint
 from openai import OpenAI
 
+"""
+谁是卧底游戏
+"""
+
 state = st.session_state
 
 # title
