@@ -1,6 +1,7 @@
 import streamlit as st
 from random import choices, randint
 from openai import OpenAI
+import json
 
 """
 谁是卧底游戏
@@ -10,6 +11,11 @@ state = st.session_state
 
 # title
 st.title("谁是卧底😎")
+
+# read the word list from the json file
+with open("word_list.json", "r") as f:
+    word_list = json.load(f)
+    pass
 
 # define the avatar dict for the players
 avatar_dict = {
@@ -70,8 +76,9 @@ if "round" not in state:
 with st.sidebar:
     st.write("游戏设置")
     with st.form(key="game_setting"):
-        spy_word = st.text_input("卧底关键词", "黄桃")
-        civilian_word = st.text_input("平民关键词", "黄瓜")
+        if "words" not in state:
+            words_num = randint(0, len(word_list)-1)
+            state.words = word_list[words_num]
         total_num = st.number_input("总人数", 5, 10, 5)
         spy_num = st.number_input("卧底人数", 1, total_num//2, 1)
         max_round = st.number_input("最大回合数", 5, 10, 10)
@@ -81,8 +88,8 @@ with st.sidebar:
         ## 提交后保存设置，初始化玩家、消息栈等
         if submitted:
             # print("游戏设置已保存")
-            state.spy_word = spy_word           # 卧底关键词
-            state.civilian_word = civilian_word # 平民关键词
+            state.spy_word = state.words["spy_word"]           # 卧底关键词
+            state.civilian_word = state.words["civilian_word"] # 平民关键词
             state.total_num = total_num        # 总人数
             state.spy_num = spy_num           # 卧底人数
             state.max_round = max_round     # 最大回合数
