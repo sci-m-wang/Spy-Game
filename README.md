@@ -1,5 +1,7 @@
 # 手把手带你使用InternLM实现谁是卧底游戏
 
+Demo: [https://huggingface.co/spaces/sci-m-wang/Who_is_The_Spy](https://huggingface.co/spaces/sci-m-wang/Who_is_The_Spy)
+
 ![](https://files.mdnice.com/user/56306/3fa10dd4-7285-4b6c-b680-ae6aeb40b51f.png)
 
 # 1. 准备工作
